@@ -3,18 +3,13 @@
 // <user profile="davey"></user>
 // <user profile="{{name}}"></user>
 
-
-var UserComponent = ng.core
+var ProtagonistComponent = ng.core
   .Component({
-    selector: "user",
-    inputs: ["profile"],
+    selector: "protagonist",
+    inputs: [],
     template:
     `
-      <div>
-        user: {{profile.name}}
-        age: {{profile.age}}
-        <pre>{{profile | json}}</pre>
-      </div>
+
     `
   })
   .Class({
@@ -24,7 +19,6 @@ var UserComponent = ng.core
 var AppComponent = ng.core
   .Component({
     selector: "app",
-    directives: [UserComponent],
     template:
     `
       <user [profile]="userProfile"></user>
@@ -42,10 +36,26 @@ var AppComponent = ng.core
     }
   })
 
-document.addEventListener('DOMContentLoaded', function() {
-  ng.platform.browser.bootstrap(AppComponent, [])
-});
+/**
+  * The App Module
+  */
+var AppModule =
+  ng.core.NgModule({
+    imports: [ ng.platformBrowser.BrowserModule ],
+    declarations: [ AppComponent, ProtagonistComponent ],
+    bootstrap: [ AppComponent ]
+  })
+  .Class({
+    constructor: function() {}
+  });
 
+
+/**
+  * Finally bootstrap
+  */
+ng.platformBrowserDynamic
+  .platformBrowserDynamic()
+  .bootstrapModule(AppModule);
 // initial state
 
 // var UserComponent = ng.core

@@ -4,12 +4,37 @@
 // Extension
 // Parameterise the header component wit ha title and subtitle. Parameterise the footer with a copyright statement.
 
-var ProfileComponent = ng.core
+var heroModel = {
+  name: "LLars Bunderchump",
+  x: 0,
+  y: 0,
+  moveNorth: function() {
+    this.x++;
+  },
+  moveSouth: function() {
+    this.x--;
+  },
+  moveEast: function() {
+    this.y--
+  },
+  moveWest: function() {
+    this.y++
+  }
+}
+
+var locationModel = {
+  name: "Nondescript Corridor",
+  description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
+  exits: "North"
+}
+
+var ProtagonistComponent = ng.core
   .Component({
-    selector: "profile",
+    selector: "protagonist",
+    inputs: [],
     template:
     `
-      <h1>User Profile</h1>
+      Name:
     `
   })
   .Class({
@@ -20,18 +45,35 @@ var ProfileComponent = ng.core
 var AppComponent = ng.core
   .Component({
     selector: "app",
-    directives: [ProfileComponent],
     template:
     `
-    <profile></profile>
+    <protagonist></protagonist>
     `
   })
   .Class({
     constructor: function() {
+      this.hero = heroModel;
+      this.location = locationModel;
     }
   })
 
+/**
+  * The App Module
+  */
+var AppModule =
+  ng.core.NgModule({
+    imports: [ ng.platformBrowser.BrowserModule ],
+    declarations: [ AppComponent, ProtagonistComponent ],
+    bootstrap: [ AppComponent ]
+  })
+  .Class({
+    constructor: function() {}
+  });
 
-document.addEventListener('DOMContentLoaded', function() {
-  ng.platform.browser.bootstrap(AppComponent, [])
-});
+
+/**
+  * Finally bootstrap
+  */
+ng.platformBrowserDynamic
+  .platformBrowserDynamic()
+  .bootstrapModule(AppModule);

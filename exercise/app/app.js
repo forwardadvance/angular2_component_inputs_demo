@@ -28,12 +28,22 @@ var locationModel = {
   exits: {north: true, east: true}
 }
 
+var inventoryModel = {
+  addItem: (item) => {
+    this.items.push(item)
+  },
+  items: [
+    {name: "Rusty Sword"}
+  ]
+}
+
 var ProtagonistComponent = ng.core
   .Component({
     selector: "protagonist",
     inputs: [],
     template:
     `
+
       <h1>{{hero.name}}</h1>
       <p>{{hero.x}}, {{hero.y}}</p>
     `
@@ -42,7 +52,25 @@ var ProtagonistComponent = ng.core
     constructor: function() {
       this.hero = heroModel;
     }
+  });
+
+var InventoryComponent = ng.core
+  .Component({
+    selector: "inventory",
+    inputs: [],
+    template:
+    `
+      <h2>Inventory</h2>
+      <li *ngFor="let item of inventory.items">
+        {{item | json}}
+      </li>
+    `
   })
+  .Class({
+    constructor: function() {
+      this.inventory = inventoryModel;
+    }
+  });
 
 var AppComponent = ng.core
   .Component({
@@ -50,6 +78,7 @@ var AppComponent = ng.core
     template:
     `
     <protagonist></protagonist>
+    <inventory></inventory>
     <button *ngIf="location.exits.north" (click)="hero.moveNorth()">North</button>
     <button *ngIf="location.exits.south" (click)="hero.moveSouth()">south</button>
     <button *ngIf="location.exits.east" (click)="hero.moveEast()">east</button>
@@ -69,7 +98,7 @@ var AppComponent = ng.core
 var AppModule =
   ng.core.NgModule({
     imports: [ ng.platformBrowser.BrowserModule ],
-    declarations: [ AppComponent, ProtagonistComponent ],
+    declarations: [ AppComponent, ProtagonistComponent, InventoryComponent ],
     bootstrap: [ AppComponent ]
   })
   .Class({

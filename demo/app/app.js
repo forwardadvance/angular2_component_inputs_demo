@@ -3,13 +3,13 @@
 // <user profile="davey"></user>
 // <user profile="{{name}}"></user>
 
-var ProtagonistComponent = ng.core
+var ProfileComponent = ng.core
   .Component({
-    selector: "protagonist",
+    selector: "profile",
     inputs: [],
     template:
     `
-
+      User Profile
     `
   })
   .Class({
@@ -21,7 +21,7 @@ var AppComponent = ng.core
     selector: "app",
     template:
     `
-      <user [profile]="userProfile"></user>
+      <profile></profile>
 
     `
   })
@@ -42,7 +42,7 @@ var AppComponent = ng.core
 var AppModule =
   ng.core.NgModule({
     imports: [ ng.platformBrowser.BrowserModule ],
-    declarations: [ AppComponent, ProtagonistComponent ],
+    declarations: [ AppComponent, ProfileComponent ],
     bootstrap: [ AppComponent ]
   })
   .Class({

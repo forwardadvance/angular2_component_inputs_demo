@@ -25,7 +25,7 @@ var heroModel = {
 var locationModel = {
   name: "Nondescript Corridor",
   description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
-  exits: "North"
+  exits: {north: true, east: true}
 }
 
 var ProtagonistComponent = ng.core
@@ -34,11 +34,13 @@ var ProtagonistComponent = ng.core
     inputs: [],
     template:
     `
-      Name:
+      <h1>{{hero.name}}</h1>
+      <p>{{hero.x}}, {{hero.y}}</p>
     `
   })
   .Class({
     constructor: function() {
+      this.hero = heroModel;
     }
   })
 
@@ -48,6 +50,10 @@ var AppComponent = ng.core
     template:
     `
     <protagonist></protagonist>
+    <button *ngIf="location.exits.north" (click)="hero.moveNorth()">North</button>
+    <button *ngIf="location.exits.south" (click)="hero.moveSouth()">south</button>
+    <button *ngIf="location.exits.east" (click)="hero.moveEast()">east</button>
+    <button *ngIf="location.exits.west" (click)="hero.moveWest()">west</button>
     `
   })
   .Class({

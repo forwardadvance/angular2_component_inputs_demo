@@ -45,7 +45,6 @@ var ProtagonistComponent = ng.core
   })
   .Class({
     constructor: function() {
-      this.hero = heroModel;
     }
   });
 
@@ -63,7 +62,6 @@ var InventoryComponent = ng.core
   })
   .Class({
     constructor: function() {
-      this.inventory = inventoryModel;
     }
   });
 

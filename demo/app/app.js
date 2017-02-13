@@ -9,7 +9,7 @@ var ProfileComponent = ng.core
     inputs: ["user"],
     template:
     `
-      User Profile {{user.name}}
+      User Profile for {{user.name}}
       <pre>{{user | json}}</pre>
 
     `
@@ -29,7 +29,6 @@ var AppComponent = ng.core
   })
   .Class({
     constructor: function() {
-      this.name = "Positive Patrick";
       this.userProfile = {name: 'Manny', age:0};
       setInterval(() => {
         this.userProfile.age ++;

@@ -6,33 +6,35 @@
 var ProfileComponent = ng.core
   .Component({
     selector: "profile",
-    inputs: ["user"],
+    inputs: ['user'],
     template:
     `
-      User Profile for {{user.name}}
+      User Profile: {{user.name}}
       <pre>{{user | json}}</pre>
 
     `
   })
   .Class({
-    constructor: function() {}
-  })
+    constructor: function() {
+      this.user = {}
+    }
+  });
+
 
 var AppComponent = ng.core
   .Component({
     selector: "app",
     template:
     `
-      <profile [user]="userProfile"></profile>
-
+      <profile [user]="loggedInUser"></profile>
     `
   })
   .Class({
     constructor: function() {
-      this.userProfile = {name: 'Manny', age:0};
+      this.loggedInUser = {name: 'Manny', age:0};
       setInterval(() => {
-        this.userProfile.age ++;
-      }, 100);
+        this.loggedInUser.age ++;
+      }, 1000);
     }
   })
 

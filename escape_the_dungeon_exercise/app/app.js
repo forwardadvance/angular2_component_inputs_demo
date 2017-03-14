@@ -82,6 +82,7 @@ var AppComponent = ng.core
     constructor: function() {
       this.hero = heroModel;
       this.location = locationModel;
+      this.inventory = inventoryModel
     }
   })
 
